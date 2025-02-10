@@ -5,7 +5,8 @@ import Card from "../../components/card/Card"
 function ListPage(){
   const data = listData;
 
-  return<div className="listPage">
+  return(
+    <div className="listPage">
       <div className="listContainer">
         <div className="wrapper">
           <Filter/>
@@ -14,8 +15,10 @@ function ListPage(){
           ))}
         </div>
       </div>
-      <div className="mapContainer"></div>
-    </div>;
+      
+    </div>
+  );
+    
   
 }
 export default ListPage;

@@ -1,0 +1,107 @@
+.post-room {
+  position: relative;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 100px;
+  //background-color: aqua;
+  padding-bottom: 200px;
+  
+
+  .background-img {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image covers the entire container */
+    z-index: -1;
+    //background-attachment: fixed; 
+  }
+
+  .post-room-content {
+    width: 80%;
+    max-width: 800px;
+    padding: 30px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    margin: 50px auto;
+  }
+
+  .post-room-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    label {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+
+    .amenities {
+      display: flex;
+      flex-direction: column;
+      //gap: 2px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      background: black;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      align-self: center;
+    }
+
+    .submit-btn:hover {
+      background: #333;
+    }
+  }
+
+  .navbar-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 0 50px;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .footer-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .hidden {
+    transform: translateY(-100%);
+  }
+  ::-webkit-scrollbar {
+    width: 2px; /* Set the width of the scrollbar */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: grey; /* Set the color of the scrollbar thumb */
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent; /* Optionally set a track background */
+  }
+}

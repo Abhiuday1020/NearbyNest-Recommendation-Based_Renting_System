@@ -5,19 +5,26 @@ function UserType() {
   const navigate = useNavigate();
 
   return (
+  
     <div className="userType">
-      <div className="box" onClick={() => navigate("/find")}>
+      {/* Background Wallpaper */}
+      <img
+        className="backgroundImage"
+        src="/wall3.jpg"
+        alt="Background Wallpaper"
+      />
+      <div className="box">
         <div className="logo">
-          <img src="/find-room-icon.png" alt="Find Room" />
+          <img src="/userlogo.jpg" alt="Find Room" />
         </div>
-        <h2>Find Your Room ?</h2>
+        <h2>Find Your Room</h2>
         <button onClick={() => navigate("/find")}>Find Room</button>
       </div>
-      <div className="box" onClick={() => navigate("/post")}>
+      <div className="box">
         <div className="logo">
-          <img src="/post-room-icon.png" alt="Post Room" />
+          <img src="/renterlogo.jpg" alt="Post Room" />
         </div>
-        <h2>Post Your Room</h2>
+        <h2>List Your Room</h2>
         <button onClick={() => navigate("/post")}>Post Room</button>
       </div>
     </div>

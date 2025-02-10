@@ -1,82 +1,104 @@
 @use "../../responsive.scss" as *;
-nav{
+
+nav {
   height: 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  a{
+  font-family: "Rubik", sans-serif;
+  background-color: white;
+  
+  
+  a {
     transition: all 0.4s ease;
+    font-size: 18px;
+    font-weight: bold;
 
-    @include sm{
+    @include sm {
       display: none;
     }
 
-    &:hover{
+    &:hover {
       scale: 1.05;
     }
   }
 
-  .left{
+  .left {
     flex: 3;
     display: flex;
     align-items: center;
     gap: 50px;
-
-    .logo{
-      font-weight: bold;
-      font-size: 20px;
+    
+    width: 100vw;
+    a{
+      color: black;
+    }
+    .logo {
       display: flex;
       align-items: center;
       gap: 10px;
 
-      img{
-        width: 28px;
-      }
-      span{
-        @include md{
-          display: none;
-        }
-
-        @include sm{
-          display: initial;
-        }
+      img {
+        max-width: 150px;  
+        height: auto;  
+        object-fit: contain;  
+        border-radius: 2%;
+        object-position: center;
       }
     }
   }
-  .right{
+
+  .right {
     flex: 2;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    background-color: #d5d4f8;
+    
+  
     height: 100%;
 
-    @include md{
+    @include md {
       background-color: transparent;
     }
-    a{
+
+    a {
       padding: 12px 24px;
+      background-color: black;
+      color: white;
       margin: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      border-radius: 20px;
     }
-    .register{
-      background-color: #6f6bc8;
+    
+
+    .signIn {
+      background-color: white ;
+      color: black;
+      border: 2px solid black;
     }
 
-    .menuIcon{
+    .register {
+      background-color: #dadadf;
+      color: black;
+    }
+
+    .menuIcon {
       display: none;
       z-index: 999;
-      img{
+
+      img {
         width: 36px;
         height: 36px;
         cursor: pointer;
       }
 
-      @include sm{
+      @include sm {
         display: inline;
       }
     }
-    .menu{
+
+    .menu {
       position: absolute;
       top: 0;
       right: -50%;
@@ -91,14 +113,17 @@ nav{
       justify-content: center;
       font-size: 24px;
 
-      &.active{
-        right:0
+      &.active {
+        right: 0;
       }
-      @include sm{
-        a{
+
+      @include sm {
+        a {
           display: initial;
         }
       }
     }
   }
 }
+
+

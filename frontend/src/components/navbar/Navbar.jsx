@@ -8,12 +8,12 @@ function Navbar() {
   return (
     <nav>
       <div className="left">
-        <a className="logo">
-          <span>NearbyNest</span>
+        <a className="logo" href="/">
+          <img src="/near.jpg" alt="NearbyNest Logo" />
         </a>
         <a href="/">Home</a>
-        <a href="/">About</a>
-        <a href="/">Contact</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
         <Link to="/user">User</Link>
       </div>
       <div className="right">
@@ -22,7 +22,7 @@ function Navbar() {
         <div className="menuIcon">
           <img
             src="/menu.png"
-            alt=""
+            alt="Menu"
             onClick={() => setOpen((prev) => !prev)}
           />
         </div>

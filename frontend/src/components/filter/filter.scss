@@ -1,49 +1,68 @@
-.filter{
+.filter {
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  h1{
+  gap: 20px;
+
+  h1 {
     font-weight: 300;
     font-size: 24px;
   }
-  .item{
-    display: flex;
+
+  .item {
+    flex: 3;
     flex-direction: column;
-    gap: 2px;
+    gap: 5px;
 
-    label{
-      font-size: 10px;
+    label {
+      font-size: 12px;
+      font-weight: bold;
     }
 
-    input,select{
-      width: 100px;
-      padding: 10px;
+    input, select {
+      height: 70px;
+      width: 260px; /* Bigger size */
+      padding: 12px; /* Bigger padding */
       border: 1px solid rgb(232, 228, 228);
-      border-radius: 5px;
-      font-size: 14px;
+      border-radius: 20px;
+      font-size: 16px; /* Bolder text */
+      font-weight: 600; 
     }
   }
-  .top{
-    input{
-      width: 100%;
-    }
-  }
-  .bottom{
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
 
-    button{
-      width: 100px;
-      padding: 10px;
+  .right {
+    flex: 1;
+
+    button {
+      height: 70px; /* Matches input size */
+      width: 180px;
       border: none;
+      background-color: black;
+      border-radius: 20px; /* Rounded edges */
+      display: flex;
+      align-items: center;
+      justify-content: center;
       cursor: pointer;
-      background-color: #6f6bc8;
+      transition: background 0.3s ease, transform 0.2s ease;
 
-      img{
-        width: 24px;
-        height: 24px;
+      &:hover {
+        background-color: #333;
+        transform: scale(1.05);
       }
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
+
+  .top {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Gap between input and button */
+
+    input {
+      width: 100%;
     }
   }
 }

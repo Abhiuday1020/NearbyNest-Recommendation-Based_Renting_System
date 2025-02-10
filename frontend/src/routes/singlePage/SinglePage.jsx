@@ -4,7 +4,9 @@ import {singlePostData, userData} from '../../lib/dummydata';
 
 function SinglePage(){
   return (
+    
     <div className="singlePage">
+      <br></br>
       <div className="details">
         <div className="wrapper">
           <Slider images={singlePostData.images}/>
@@ -109,8 +111,11 @@ function SinglePage(){
               Save the Place
             </button>
           </div>
+          <br></br>
         </div>
+        <br />
       </div>
+      <br />
     </div>
   )
 }

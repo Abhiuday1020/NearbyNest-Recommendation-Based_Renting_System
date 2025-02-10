@@ -11,6 +11,9 @@ import PostRoom from "./routes/postRoom/postRoom";
 import FindRoom from "./routes/findRoom/findRoom";
 import LoginPage from "./routes/loginPage/login";
 import SignupPage from "./routes/signupPage/signup";
+import Register from "./routes/register/register";
+import About from "./routes/about/about";
+import Contact from "./routes/contact/contact";
 
 function App() {
 
@@ -42,6 +45,18 @@ function App() {
         {
           path:"/find",
           element:<FindRoom/>
+        },
+        {
+          path:"/register",
+          element:<Register/>
+        },
+        {
+          path:"/about",
+          element:<About/>
+        },
+        {
+          path:"/contact",
+          element:<Contact/>
         },
       ]
     },

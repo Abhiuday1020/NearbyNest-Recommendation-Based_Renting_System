@@ -240,13 +240,13 @@ export const singlePostData = {
   school:'250m away',
   bus:'100m away',
   restaurant:'50m away',
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  description: ""
   };
   
   export const userData = {
   id:"1",
   name:'Yusuf Koroglu',
-  img:'https://drive.google.com/file/d/1zG-mECHYg2m2NJ--GD7wSbiqmsQkEz-5/view?usp=sharing'
+  img:'/userlogo.jpg'
   };
   
   

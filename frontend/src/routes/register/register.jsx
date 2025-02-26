@@ -1,24 +1,54 @@
-import './register.scss';
+import "./register.scss";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
+import apiRequest from "../../lib/apiRequest";
 
 function Register() {
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("")
+    setIsLoading(true);
+    const formData = new FormData(e.target);
+
+    const username = formData.get("username");
+    const email = formData.get("email");
+    const password = formData.get("password");
+
+    try {
+      const res = await apiRequest.post("/auth/register", {
+        username,
+        email,
+        password,
+      });
+
+      navigate("/login");
+    } catch (err) {
+      setError(err.response.data.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
-    <div className="register-page">
-      <div className="register-container">
-        <form className="register-form" >
-          <h2>Sign Up</h2>
-          <label htmlFor="name">Name</label>
-          <input type="text" id="name" placeholder="Enter your name" required />
-          
-          <label htmlFor="email">Email</label>
-          <input type="email" id="email" placeholder="Enter your email" required />
-          
-          <label htmlFor="password">Password</label>
-          <input type="password" id="password" placeholder="Enter your password" required />
-          
-          <button type="submit" className="signup-btn">Sign Up</button>
-          
-          <p className="login-text">Already have an account? <a href="/login">Login</a></p>
+    <div className="registerPage">
+      <div className="formContainer">
+        <form onSubmit={handleSubmit}>
+          <h1>Create an Account</h1>
+          <input name="username" type="text" placeholder="Username" />
+          <input name="email" type="text" placeholder="Email" />
+          <input name="password" type="password" placeholder="Password" />
+          <button>Register</button>
+          {error && <span>{error}</span>}
+          <Link to="/login">Do you have an account?</Link>
         </form>
+      </div>
+      <div className="imgContainer">
+        <img src="/bg.png" alt="" />
       </div>
     </div>
   );

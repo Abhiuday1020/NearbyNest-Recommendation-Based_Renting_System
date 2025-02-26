@@ -2,8 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "start" :"nodemon index.js"
+    "start": "nodemon index.js"
   },
   "keywords": [],
   "author": "Abhiuday",
@@ -18,5 +19,9 @@
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.10.0"
+  },
+  "devDependencies": {
+    "@prisma/client": "^6.4.1",
+    "prisma": "^6.4.1"
   }
 }

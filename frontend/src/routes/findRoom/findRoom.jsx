@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import "./findRoom.scss";
@@ -6,6 +7,18 @@ import "./findRoom.scss";
 function FindRoom() {
   const [hideNavbar, setHideNavbar] = useState(false);
   const [hideFooter, setHideFooter] = useState(false);
+  const [formData, setFormData] = useState({
+    place: "",
+    rent: "",
+    distance: "",
+    gender: "Male",
+    wifi: "Yes",
+    food: "Yes",
+    parking: "2 Wheeler",
+    amenities: [],
+  });
+
+  const navigate = useNavigate();
   let lastScrollY = window.scrollY;
 
   useEffect(() => {
@@ -24,6 +37,38 @@ function FindRoom() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    if (type === "checkbox") {
+      setFormData((prevData) => ({
+        ...prevData,
+        amenities: checked
+          ? [...prevData.amenities, value]
+          : prevData.amenities.filter((amenity) => amenity !== value),
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formattedData = {
+      ...formData,
+      amenities: formData.amenities.join(", "), 
+    };
+
+    try {
+      const response = await axios.post("http://localhost:5000/recommendations", formData);
+      navigate("/recommendations", { state: { recommendations: response.data } });
+    } catch (error) {
+      console.error("Error fetching recommendations:", error);
+    }
+  };
+
   return (
     <div className="find-room">
       <img src="/wall8.jpg" alt="Background" className="background-img" />
@@ -33,49 +78,49 @@ function FindRoom() {
       <div className="find-room-content">
         <h1>Post Your Room</h1>
         <p>Fill out the details to post your room.</p>
-        <form className="find-room-form">
+        <form className="find-room-form" onSubmit={handleSubmit}>
           <label>Place:</label>
-          <input type="text" placeholder="Enter place" />
-          
+          <input type="text" name="place" value={formData.place} onChange={handleChange} placeholder="Enter place" />
+
           <label>Rent:</label>
-          <input type="number" placeholder="Enter rent amount" />
-          
+          <input type="number" name="rent" value={formData.rent} onChange={handleChange} placeholder="Enter rent amount" />
+
           <label>Distance from College (in meters):</label>
-          <input type="number" placeholder="Enter distance" />
-          
+          <input type="number" name="distance" value={formData.distance} onChange={handleChange} placeholder="Enter distance" />
+
           <label>Gender:</label>
-          <select>
+          <select name="gender" value={formData.gender} onChange={handleChange}>
             <option>Male</option>
             <option>Female</option>
           </select>
-          
+
           <label>WiFi:</label>
-          <select>
+          <select name="wifi" value={formData.wifi} onChange={handleChange}>
             <option>Yes</option>
             <option>No</option>
           </select>
-          
+
           <label>Food Available:</label>
-          <select>
+          <select name="food" value={formData.food} onChange={handleChange}>
             <option>Yes</option>
             <option>No</option>
           </select>
-          
+
           <label>Parking Available:</label>
-          <select>
+          <select name="parking" value={formData.parking} onChange={handleChange}>
             <option>2 Wheeler</option>
             <option>4 Wheeler</option>
           </select>
-          
+
           <label>Amenities:</label>
           <div className="amenities">
-            <label><input type="checkbox" /> Hospital</label>
-            <label><input type="checkbox" /> Gym</label>
-            <label><input type="checkbox" /> Medical Shop</label>
-            <label><input type="checkbox" /> Stationary Shop</label>
-            <label><input type="checkbox" /> General Purpose Store</label>
+            <label><input type="checkbox" value="Hospital" onChange={handleChange} /> Hospital</label>
+            <label><input type="checkbox" value="Gym" onChange={handleChange} /> Gym</label>
+            <label><input type="checkbox" value="Medical Shop" onChange={handleChange} /> Medical Shop</label>
+            <label><input type="checkbox" value="Stationary Shop" onChange={handleChange} /> Stationary Shop</label>
+            <label><input type="checkbox" value="General Purpose Store" onChange={handleChange} /> General Purpose Store</label>
           </div>
-          
+
           <button type="submit" className="submit-btn">Submit</button>
         </form>
       </div>

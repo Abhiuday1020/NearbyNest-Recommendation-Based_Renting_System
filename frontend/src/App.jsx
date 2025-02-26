@@ -14,6 +14,7 @@ import Register from "./routes/register/register";
 import About from "./routes/about/about";
 import Contact from "./routes/contact/contact";
 import ProfilePage from "./routes/profilePage/profilePage";
+import Recommendations from "./routes/findRoom/recommendations";
 
 function App() {
 
@@ -65,6 +66,10 @@ function App() {
         {
           path:"/profile",
           element:<ProfilePage/>
+        },
+        {
+          path:"/recommendation",
+          element:<Recommendations/>
         },
       ]
     }

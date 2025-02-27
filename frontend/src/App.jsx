@@ -68,7 +68,7 @@ function App() {
           element:<ProfilePage/>
         },
         {
-          path:"/recommendation",
+          path:"/recommendations",
           element:<Recommendations/>
         },
       ]

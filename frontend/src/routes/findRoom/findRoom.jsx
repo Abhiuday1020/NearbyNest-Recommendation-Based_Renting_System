@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import Footer from "../../components/footer/Footer";
 import "./findRoom.scss";
+import axios from "axios";
 
 function FindRoom() {
   const [hideNavbar, setHideNavbar] = useState(false);
@@ -33,12 +34,14 @@ function FindRoom() {
       }
       lastScrollY = currentScrollY;
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+
     if (type === "checkbox") {
       setFormData((prevData) => ({
         ...prevData,
@@ -62,7 +65,7 @@ function FindRoom() {
     };
 
     try {
-      const response = await axios.post("http://localhost:5000/recommendations", formData);
+      const response = await axios.post("http://localhost:5000/recommendations", formattedData);
       navigate("/recommendations", { state: { recommendations: response.data } });
     } catch (error) {
       console.error("Error fetching recommendations:", error);
@@ -114,11 +117,26 @@ function FindRoom() {
 
           <label>Amenities:</label>
           <div className="amenities">
-            <label><input type="checkbox" value="Hospital" onChange={handleChange} /> Hospital</label>
-            <label><input type="checkbox" value="Gym" onChange={handleChange} /> Gym</label>
-            <label><input type="checkbox" value="Medical Shop" onChange={handleChange} /> Medical Shop</label>
-            <label><input type="checkbox" value="Stationary Shop" onChange={handleChange} /> Stationary Shop</label>
-            <label><input type="checkbox" value="General Purpose Store" onChange={handleChange} /> General Purpose Store</label>
+            <label>
+              <input type="checkbox" value="Hospital" checked={formData.amenities.includes("Hospital")} onChange={handleChange} />
+              Hospital
+            </label>
+            <label>
+              <input type="checkbox" value="Gym" checked={formData.amenities.includes("Gym")} onChange={handleChange} />
+              Gym
+            </label>
+            <label>
+              <input type="checkbox" value="Medical Shop" checked={formData.amenities.includes("Medical Shop")} onChange={handleChange} />
+              Medical Shop
+            </label>
+            <label>
+              <input type="checkbox" value="Stationary Shop" checked={formData.amenities.includes("Stationary Shop")} onChange={handleChange} />
+              Stationary Shop
+            </label>
+            <label>
+              <input type="checkbox" value="General Purpose Store" checked={formData.amenities.includes("General Purpose Store")} onChange={handleChange} />
+              General Purpose Store
+            </label>
           </div>
 
           <button type="submit" className="submit-btn">Submit</button>

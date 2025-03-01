@@ -79,7 +79,7 @@ function FindRoom() {
         <Navbar />
       </div>
       <div className="find-room-content">
-        <h1>Post Your Room</h1>
+        <h1>Find Your Room</h1>
         <p>Fill out the details to post your room.</p>
         <form className="find-room-form" onSubmit={handleSubmit}>
           <label>Place:</label>
@@ -118,24 +118,29 @@ function FindRoom() {
           <label>Amenities:</label>
           <div className="amenities">
             <label>
+            Hospital
               <input type="checkbox" value="Hospital" checked={formData.amenities.includes("Hospital")} onChange={handleChange} />
-              Hospital
+              
             </label>
             <label>
+            Gym
               <input type="checkbox" value="Gym" checked={formData.amenities.includes("Gym")} onChange={handleChange} />
-              Gym
+              
             </label>
             <label>
+            Medical Shop
               <input type="checkbox" value="Medical Shop" checked={formData.amenities.includes("Medical Shop")} onChange={handleChange} />
-              Medical Shop
+              
             </label>
             <label>
+            Stationary Shop
               <input type="checkbox" value="Stationary Shop" checked={formData.amenities.includes("Stationary Shop")} onChange={handleChange} />
-              Stationary Shop
+              
             </label>
             <label>
+            General Purpose Store
               <input type="checkbox" value="General Purpose Store" checked={formData.amenities.includes("General Purpose Store")} onChange={handleChange} />
-              General Purpose Store
+              
             </label>
           </div>
 

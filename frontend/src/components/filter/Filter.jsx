@@ -2,110 +2,154 @@ import { useState } from "react";
 import "./filter.scss";
 import { useSearchParams } from "react-router-dom";
 
-function Filter() {
+function Filter({ onApplyFilters }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [query, setQuery] = useState({
-    type: searchParams.get("type") || "",
-    city: searchParams.get("city") || "",
-    property: searchParams.get("property") || "",
-    minPrice: searchParams.get("minPrice") || "",
-    maxPrice: searchParams.get("maxPrice") || "",
-    bedroom: searchParams.get("bedroom") || "",
+    Place: searchParams.get("Place") || "",
+    Amenities: searchParams.get("Amenities")?.split(",") || [],
+    Distance: searchParams.get("Distance") || "",
+    Rent: searchParams.get("Rent") || "",
+    Gender: searchParams.get("Gender") || "",
+    Bedroom: searchParams.get("Bedroom") || "",
   });
 
   const handleChange = (e) => {
-    setQuery({
-      ...query,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value, type, checked } = e.target;
+
+    if (name === "Amenities") {
+      setQuery((prevQuery) => {
+        let updatedAmenities = prevQuery.Amenities.includes(value)
+          ? prevQuery.Amenities.filter((amenity) => amenity !== value)
+          : [...prevQuery.Amenities, value];
+
+        return { ...prevQuery, Amenities: updatedAmenities };
+      });
+    } else {
+      setQuery({ ...query, [name]: type === "number" ? Number(value) : value });
+    }
   };
 
   const handleFilter = () => {
-    setSearchParams(query);
+    const newParams = { ...query };
+    if (query.Amenities.length) {
+      newParams.Amenities = query.Amenities.join(",");
+    } else {
+      delete newParams.Amenities;
+    }
+
+    console.log("Updated Search Params:", newParams); 
+    setSearchParams(newParams);
+    onApplyFilters(newParams); 
   };
 
   return (
     <div className="filter">
       <h1>
-        Search results for <b>{searchParams.get("location")}</b>
+        Search results for <b>{searchParams.get("Place")}</b>
       </h1>
       <div className="top">
         <div className="item">
-          <label htmlFor="city">Location</label>
+          <label htmlFor="Place">Location</label>
           <input
             type="text"
-            id="city"
-            name="city"
-            placeholder="City Location"
+            id="Place"
+            name="Place"
+            placeholder="Place"
             onChange={handleChange}
-            defaultValue={query.city}
+            value={query.Place}
           />
         </div>
       </div>
       <div className="bottom">
         <div className="item">
-          <label htmlFor="type">Amenities</label>
+          <label>Amenities</label>
+          <div className="checkbox-group">
+            {[
+              "Medical Shops",
+              "Restaurants",
+              "Hospital",
+              "Gym",
+              "Transportation",
+              "Grocery Stores",
+              "Stationary Shop",
+              "General Purpose Store",
+            ].map((amenity) => (
+              <label key={amenity}>
+                <input
+                  type="checkbox"
+                  name="Amenities"
+                  value={amenity}
+                  checked={query.Amenities.includes(amenity)}
+                  onChange={handleChange}
+                />
+                {amenity}
+              </label>
+            ))}
+          </div>
+        </div>
+        <div className="item">
+          <label htmlFor="Distance">Distance Range</label>
           <select
-            name="type"
-            id="type"
+            name="Distance"
+            id="Distance"
             onChange={handleChange}
-            defaultValue={query.type}
+            value={query.Distance}
           >
             <option value="">any</option>
-            <option value="buy">Buy</option>
-            <option value="rent">Rent</option>
+            <option value="1000">0-1 km</option>
+            <option value="2000">1-2 km</option>
+            <option value="3000">2-3 km</option>
+            <option value="4000">3-4 km</option>
+            <option value="5000">4-5 km</option>
+            <option value="6000">5-6 km</option>
+            <option value="7000">6-7 km</option>
           </select>
         </div>
         <div className="item">
-          <label htmlFor="property">Distance Range</label>
+          <label htmlFor="Rent">Price Range</label>
           <select
-            name="property"
-            id="property"
+            name="Rent"
+            id="Rent"
             onChange={handleChange}
-            defaultValue={query.property}
+            value={query.Rent}
           >
             <option value="">any</option>
-            <option value="apartment">Apartment</option>
-            <option value="house">House</option>
-            <option value="condo">Condo</option>
-            <option value="land">Land</option>
+            <option value="3000">2000-3000</option>
+            <option value="4000">3000-4000</option>
+            <option value="5000">4000-5000</option>
+            <option value="6000">5000-6000</option>
+            <option value="7000">6000-7000</option>
+            <option value="8000">7000-8000</option>
+            <option value="9000">8000-9000</option>
+            <option value="10000">or Higher</option>
           </select>
         </div>
         <div className="item">
-          <label htmlFor="minPrice">Min Price</label>
-          <input
-            type="number"
-            id="minPrice"
-            name="minPrice"
-            placeholder="any"
+          <label htmlFor="Gender">Gender</label>
+          <select
+            name="Gender"
+            id="Gender"
             onChange={handleChange}
-            defaultValue={query.minPrice}
-          />
+            value={query.Gender}
+          >
+            <option value="">any</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
         </div>
         <div className="item">
-          <label htmlFor="maxPrice">Max Price</label>
+          <label htmlFor="Bedroom">Bedroom</label>
           <input
             type="number"
-            id="maxPrice"
-            name="maxPrice"
+            id="Bedroom"
+            name="Bedroom"
             placeholder="any"
             onChange={handleChange}
-            defaultValue={query.maxPrice}
-          />
-        </div>
-        <div className="item">
-          <label htmlFor="bedroom">Bedroom</label>
-          <input
-            type="number"
-            id="bedroom"
-            name="bedroom"
-            placeholder="any"
-            onChange={handleChange}
-            defaultValue={query.bedroom}
+            value={query.Bedroom}
           />
         </div>
         <button onClick={handleFilter}>
-          <img src="/search.png" alt="" />
+          <img src="/search.png" alt="Search" />
         </button>
       </div>
     </div>

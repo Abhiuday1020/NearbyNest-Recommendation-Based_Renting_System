@@ -25,14 +25,16 @@ model User {
 
 model Room {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  place     String
-  rent      Float
-  distance  Float
-  gender    String
-  wifi      String
-  food      String
-  parking   String
-  amenities String
-  createdAt DateTime @default(now()) 
-  updatedAt DateTime @updatedAt 
+  Place     String
+  Rent      Int
+  Distance  Int
+  Gender    String
+  WiFi      String
+  Food      String
+  Parking   String
+  Amenities String
+  Bedroom   Int
+  Bathroom  Int
+  createdAt DateTime? @default(now()) 
+  updatedAt DateTime? @updatedAt 
 }

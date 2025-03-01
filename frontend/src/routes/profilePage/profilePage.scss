@@ -2,89 +2,164 @@
 
 .profilePage {
   display: flex;
-  height: 100%;
+  height: 100vh;
+  margin-top: 20px;
+  border-radius: 30px;
+  margin-bottom: 80px;
 
-  @include md{
+  @include md {
     flex-direction: column;
     overflow: scroll;
   }
 
-  .details {
-    flex: 3;
-    overflow-y: scroll;
-    padding-bottom: 50px;
+  .page {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    background-color: rgb(243, 244, 248);
+    border-radius: 30px;
+  }
 
-    @include md{
-      flex:none;
-      height: max-content;
+  .user {
+    flex: 1;
+    padding: 20px;
+    background-color: rgb(16, 16, 16);
+    display: flex;
+    flex-direction: column;
+    align-items: center; // Center align everything inside user
+    border-radius: 30px;
+    .title {
+      text-align: center;
+
+      h1 {
+        font-weight: 800; // Make the title bold
+        color: white;
+      }
     }
 
-    .wrapper{
-      padding-right: 50px;
+    .info {
       display: flex;
       flex-direction: column;
-      gap: 50px;
+      align-items: center; // Center align contents
+      gap: 25px; // Increase spacing between elements
 
-      .title{
+      span {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-
-        h1{
-          font-weight: 300;
-        }
-
-        button{
-          padding: 12px 24px;
-          background-color: #fece51;
-          cursor: pointer;
-          border: none;
-        }
+        gap: 15px; // Increased spacing inside span
+        font-size: 16px;
+        color: white;
+        font-weight: bold;
       }
 
-      .info{
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
+      img {
+        width: 130px; // Slightly bigger image
+        height: 130px;
+        border-radius: 15%;
+        object-fit: cover;
+        align-items: center;
+        //padding: 20px;
+        margin-top: 20px;
+      }
 
-        span{
-          display: flex;
-          align-items: center;
-          gap: 20px;
-        }
+      button {
+        background-color: #f2efef;
+        color: #232222;
+        font-weight: 800; // Make the font extra bold
+        font-size: 15px; // Increase font size
+        border-radius: 20px; // More rounded borders
+        border: none;
+        padding: 14px 28px; // Increase padding
+        width: 180px; // Increase button width
+        height: 50px; // Increase button height
+        cursor: pointer;
+        text-align: center;
+        margin-top: 10px; // Add space between buttons
+        align-items: center;
 
-        button{
-          width: 100px;
-          background-color: teal;
-          border: none;
-          color: white;
-          padding: 10px 20px;
-          cursor: pointer;
-          border-radius: 5px;
-        }
-
-        img{
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          object-fit: cover;
+        &:hover {
+          background-color: #9a9999;
         }
       }
     }
   }
-  .chatContainer {
-    flex: 2;
-    background-color: #fcf5f3;
-    height: 100%;
 
-    @include md{
-      flex:none;
-      height: max-content;
+  .vertical {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 100vh;
+    padding: 20px;
+    background-color: #f7f4f4;
+    border-radius: 30px;
+
+    scrollbar-width: thin; // For Firefox
+    scrollbar-color: #888 transparent; // Thumb & track colors
+
+    &::-webkit-scrollbar {
+      width: 6px; // Make scrollbar very thin
     }
 
-    .wrapper{
-      padding: 0px 20px;
-      height: 100%;
+    &::-webkit-scrollbar-thumb {
+      background-color: #888; // Darker scrollbar for visibility
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #555; // Darker when hovered
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent; // Keep track invisible
+    }
+  }
+
+  .list {
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 10px;
+    border-radius: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+    
+  }
+
+  .chatContainer {
+    flex: 1;
+    background-color: #fcf5f3;
+    padding: 20px;
+    border-radius: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h1 {
+      font-weight: 200; // Make section titles bold
+    }
+
+    button {
+      padding: 14px 28px; // Increase padding for better UI
+      background-color: #000;
+      color: #fff;
+      font-weight: 800; // Extra bold
+      font-size: 15px;
+      border-radius: 25px;
+      border: none;
+      cursor: pointer;
+      width: 180px;
+      height: 70px;
+      text-align: center;
+
+      &:hover {
+        background-color: #333;
+      }
     }
   }
 }

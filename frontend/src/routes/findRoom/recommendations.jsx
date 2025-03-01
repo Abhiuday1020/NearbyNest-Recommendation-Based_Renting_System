@@ -11,7 +11,7 @@ function Recommendations() {
 
   // Redirect user if no recommendations exist (user directly visits this page)
   useEffect(() => {
-    console.log(recommendations)
+    console.log(recommendations);
     if (!location.state) {
       navigate("/"); // Redirect back to the form page
     }
@@ -19,6 +19,9 @@ function Recommendations() {
 
   return (
     <div className="recommendations">
+      {/* Background Wallpaper */}
+      {/*<img className="backgroundImage" src="/wall3.jpg" alt="Background Wallpaper" />*/}
+
       <h1>Recommended Rooms</h1>
       <div className="recommendations-list">
         {recommendations.length ? (

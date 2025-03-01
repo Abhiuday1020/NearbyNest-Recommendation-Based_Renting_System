@@ -39,6 +39,7 @@ function Login() {
   return (
     <div className="login">
       <div className="formContainer">
+        <div className="box">
         <form onSubmit={handleSubmit}>
           <h1>Welcome back</h1>
           <input
@@ -59,6 +60,9 @@ function Login() {
           {error && <span>{error}</span>}
           <Link to="/register">{"Don't"} you have an account?</Link>
         </form>
+        
+        </div>
+        
       </div>
       <div className="imgContainer">
         <img src="/bg.png" alt="" />

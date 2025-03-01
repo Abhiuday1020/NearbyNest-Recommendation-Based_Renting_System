@@ -1,61 +1,100 @@
 .registerPage {
-  height: 100%;
+  height: 100vh; // Full height
   display: flex;
+  align-items: stretch; // Aligns both child divs to stretch equally
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  margin-top: 20px;
 
   .formContainer {
-    flex: 3;
-    height: 100%;
+    flex: 4; // Wider container
+    height: 520px;
     display: flex;
-    align-items: center;
+    //align-items: center;
     justify-content: center;
+    margin-top: 50px;
+    //background-color: rgba(215, 211, 223, 0.9);
 
     form {
+      background-color: rgba(244, 243, 245, 0.9);
+      width: 500px; // Larger form width
+      padding: 40px;
+      //background: #fff;
+      border-radius: 50px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 20px; // Space between elements
+      align-items: center; // Center everything in the form
+
+      h1 {
+        font-size: 26px;
+        font-weight: bold;
+        text-align: center;
+        padding-bottom: 30px;
+      }
 
       input {
-        padding: 20px;
+        width: 100%;
+        padding: 14px;
+        font-size: 16px;
         border: 1px solid gray;
-        border-radius: 5px;
+        border-radius: 25px; // Rounded borders
+        outline: none;
+        padding: 20px;
       }
 
       button {
-        padding: 20px;
-        border-radius: 5px;
-        border: none;
-        background-color: teal;
-        color: white;
+        width: 100%;
+        padding: 25px;
+        font-size: 18px;
         font-weight: bold;
+        border-radius: 25px; // Rounded borders
+        border: none;
+        background-color: black; // Black background
+        color: white; // White text
         cursor: pointer;
+        transition: 0.3s;
+
+        &:hover {
+          background-color: #333;
+        }
 
         &:disabled {
-          background-color: #bed9d8;
+          background-color: #BED9D8;
           cursor: not-allowed;
         }
       }
 
       span {
-        color: rgba(255, 0, 0, 0.591);
+        color: rgba(255, 0, 0, 0.7);
       }
 
       a {
-        font-size: 14px;
+        font-size: 16px;
+        font-weight: bold;
         color: gray;
+        text-decoration: none;
         border-bottom: 1px solid gray;
-        width: max-content;
+        text-align: center;
       }
     }
   }
 
   .imgContainer {
-    flex: 2;
-    background-color: #fcf5f3;
+    flex: 3; // Wider image container
+    //background-color: #fcf5f3;
+    background-color: rgba(244, 243, 245, 0.9);
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100vh; // Align top edges with the parent container
+    border-radius: 40px;
     img {
       width: 100%;
+      height: 100%;
+      object-fit: cover; // Ensures the image fits properly
     }
   }
 }

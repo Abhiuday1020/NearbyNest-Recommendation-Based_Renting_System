@@ -1,9 +1,14 @@
 @use "../../responsive" as *;
 
 .homePage {
+  position: relative;
   display: flex;
   height: 100vh; // Ensures full height of viewport
-  
+  background-color: #f3f3f8;
+  border-radius: 50px;
+  margin-top: 20px;
+  padding-bottom: 150px;
+  margin-bottom: 90px;
 
   .textContainer {
     flex: 3;
@@ -13,6 +18,8 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    border-radius: 50px;
+    
     
     
     &::-webkit-scrollbar {
@@ -76,11 +83,12 @@
         font-size: 30px;
         font-weight: bolder;
         border: none;
-        border-radius: 50px;
+        border-radius: 30px;
         background-color: #19191a; 
         color: white;
         cursor: pointer;
         text-align: center;
+        align-items: center;
         transition: all 0.3s ease;
         margin-top: 30px; 
         display: block;
@@ -95,8 +103,9 @@
 
   .imgContainer {
     flex: 2;
-    border-radius: 40px;
-    background-color: #dadadf;
+    border-radius: 50px;
+    //background-color: #dadadf;
+    background-color: rgba(244, 243, 245, 0.9);
     position: relative;
     display: flex;
     align-items: center;

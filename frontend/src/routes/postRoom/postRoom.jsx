@@ -8,14 +8,16 @@ function PostRoom() {
   const [hideNavbar, setHideNavbar] = useState(false);
   const [hideFooter, setHideFooter] = useState(false);
   const [formData, setFormData] = useState({
-    place: "",
-    rent: "",
-    distance: "",
-    gender: "Male",
-    wifi: "No",
-    food: "No",
-    parking: "2 Wheeler",
-    amenities: [],
+    Place: "",
+    Rent: "",
+    Distance: "",
+    Gender: "Male",
+    WiFi: "No",
+    Food: "No",
+    Parking: "2 Wheeler",
+    Amenities: [],
+    Bedroom: "",
+    Bathroom: ""
   });
 
   const [error, setError] = useState("");
@@ -39,22 +41,20 @@ function PostRoom() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Handle input change
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     if (type === "checkbox") {
       setFormData((prev) => ({
         ...prev,
-        amenities: checked
-          ? [...prev.amenities, value]
-          : prev.amenities.filter((amenity) => amenity !== value),
+        Amenities: checked
+          ? [...prev.Amenities, value]
+          : prev.Amenities.filter((Amenity) => Amenity !== value),
       }));
     } else {
       setFormData({ ...formData, [name]: value });
     }
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -62,22 +62,27 @@ function PostRoom() {
   
     const formattedData = {
       ...formData,
-      amenities: formData.amenities.join(", "), 
+      Rent: parseInt(formData.Rent, 10),
+      Distance: parseInt(formData.Distance, 10),
+      Bedroom: parseInt(formData.Bedroom, 10),
+      Bathroom: parseInt(formData.Bathroom, 10),
+      Amenities: formData.Amenities.join(", "), 
     };
   
     try {
       const res = await apiRequest.post("/postRoom/post", formattedData);
       alert("Room posted successfully!");
-  
       setFormData({
-        place: "",
-        rent: "",
-        distance: "",
-        gender: "Male",
-        wifi: "No",
-        food: "No",
-        parking: "2 Wheeler",
-        amenities: [],
+        Place: "",
+        Rent: "",
+        Distance: "",
+        Gender: "Male",
+        WiFi: "No",
+        Food: "No",
+        Parking: "2 Wheeler",
+        Amenities: [],
+        Bedroom: "",
+        Bathroom: ""
       });
     } catch (err) {
       setError(err.response?.data?.message || "Something went wrong.");
@@ -97,45 +102,51 @@ function PostRoom() {
         <p>Fill out the details to post your room.</p>
         <form className="post-room-form" onSubmit={handleSubmit}>
           <label>Place:</label>
-          <input type="text" name="place" placeholder="Enter place" value={formData.place} onChange={handleChange} required />
+          <input type="text" name="Place" placeholder="Enter place" value={formData.Place} onChange={handleChange} required />
 
           <label>Rent:</label>
-          <input type="number" name="rent" placeholder="Enter rent amount" value={formData.rent} onChange={handleChange} required />
+          <input type="number" name="Rent" placeholder="Enter rent amount" value={formData.Rent} onChange={handleChange} required />
 
           <label>Distance from College (in meters):</label>
-          <input type="number" name="distance" placeholder="Enter distance" value={formData.distance} onChange={handleChange} required />
+          <input type="number" name="Distance" placeholder="Enter distance" value={formData.Distance} onChange={handleChange} required />
 
           <label>Gender:</label>
-          <select name="gender" value={formData.gender} onChange={handleChange}>
+          <select name="Gender" value={formData.Gender} onChange={handleChange}>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>
 
           <label>WiFi:</label>
-          <select name="wifi" value={formData.wifi} onChange={handleChange}>
+          <select name="WiFi" value={formData.WiFi} onChange={handleChange}>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
           </select>
 
           <label>Food Available:</label>
-          <select name="food" value={formData.food} onChange={handleChange}>
+          <select name="Food" value={formData.Food} onChange={handleChange}>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
           </select>
 
           <label>Parking Available:</label>
-          <select name="parking" value={formData.parking} onChange={handleChange}>
+          <select name="Parking" value={formData.Parking} onChange={handleChange}>
             <option value="2 Wheeler">2 Wheeler</option>
             <option value="4 Wheeler">4 Wheeler</option>
           </select>
 
+          <label>Number of Bedrooms:</label>
+          <input type="number" name="Bedroom" placeholder="Enter number of bedrooms" value={formData.Bedroom} onChange={handleChange} required />
+
+          <label>Number of Bathrooms:</label>
+          <input type="number" name="Bathroom" placeholder="Enter number of bathrooms" value={formData.Bathroom} onChange={handleChange} required />
+
           <label>Amenities:</label>
           <div className="amenities">
-            <label><input type="checkbox" name="amenities" value="Hospital" checked={formData.amenities.includes("Hospital")} onChange={handleChange} /> Hospital</label>
-            <label><input type="checkbox" name="amenities" value="Gym" checked={formData.amenities.includes("Gym")} onChange={handleChange} /> Gym</label>
-            <label><input type="checkbox" name="amenities" value="Medical Shop" checked={formData.amenities.includes("Medical Shop")} onChange={handleChange} /> Medical Shop</label>
-            <label><input type="checkbox" name="amenities" value="Stationary Shop" checked={formData.amenities.includes("Stationary Shop")} onChange={handleChange} /> Stationary Shop</label>
-            <label><input type="checkbox" name="amenities" value="General Purpose Store" checked={formData.amenities.includes("General Purpose Store")} onChange={handleChange} /> General Purpose Store</label>
+            <label><input type="checkbox" name="Amenities" value="Hospital" checked={formData.Amenities.includes("Hospital")} onChange={handleChange} /> Hospital</label>
+            <label><input type="checkbox" name="Amenities" value="Gym" checked={formData.Amenities.includes("Gym")} onChange={handleChange} /> Gym</label>
+            <label><input type="checkbox" name="Amenities" value="Medical Shop" checked={formData.Amenities.includes("Medical Shop")} onChange={handleChange} /> Medical Shop</label>
+            <label><input type="checkbox" name="Amenities" value="Stationary Shop" checked={formData.Amenities.includes("Stationary Shop")} onChange={handleChange} /> Stationary Shop</label>
+            <label><input type="checkbox" name="Amenities" value="General Purpose Store" checked={formData.Amenities.includes("General Purpose Store")} onChange={handleChange} /> General Purpose Store</label>
           </div>
 
           <button type="submit" className="submit-btn" disabled={isLoading}>

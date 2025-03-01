@@ -6,7 +6,10 @@ nav {
   justify-content: space-between;
   align-items: center;
   font-family: "Rubik", sans-serif;
-  background-color: white;
+  background-color: rgb(243, 244, 248);
+  padding-left: 20px;
+  margin-top: 20px;
+  border-radius: 30px;
   
   
   a {
@@ -40,9 +43,9 @@ nav {
 
       img {
         max-width: 150px;  
-        height: auto;  
+        height: 50px;  
         object-fit: contain;  
-        border-radius: 2%;
+        border-radius: 5%;
         object-position: center;
       }
     }
@@ -61,6 +64,13 @@ nav {
       background-color: transparent;
     }
 
+    span {
+      font-weight: bold;
+      font-size: 20px;
+    }
+    .username {
+      text-transform: capitalize;
+    }
     a {
       padding: 12px 24px;
       background-color: black;

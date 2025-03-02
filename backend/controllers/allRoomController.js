@@ -5,7 +5,9 @@ export const allRooms = async (req, res) => {
         console.log("Received request URL:", req.url); 
         console.log("Received query params:", req.query);
 
-        const { Place, Rent, Distance, Gender, Bedroom, Amenities } = req.query;
+        const { Place, Rent, Distance, Gender, Bedroom, Amenities } = req.body;
+        console.log("Received request body:", req.body);
+
         let filters = {};
 
         if (Place && Place !== "any") {

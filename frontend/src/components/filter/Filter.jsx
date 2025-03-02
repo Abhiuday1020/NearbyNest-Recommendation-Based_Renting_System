@@ -11,7 +11,7 @@ function Filter({ onApplyFilters }) {
     Rent: searchParams.get("Rent") || "",
     Gender: searchParams.get("Gender") || "",
     Bedroom: searchParams.get("Bedroom") || "",
-  });
+  }); 
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -36,11 +36,16 @@ function Filter({ onApplyFilters }) {
     } else {
       delete newParams.Amenities;
     }
-
-    console.log("Updated Search Params:", newParams); 
-    setSearchParams(newParams);
-    onApplyFilters(newParams); 
+  
+    console.log("Updated Search Params:", newParams);
+    setSearchParams(newParams); 
+    if (typeof onApplyFilters === "function") {
+      onApplyFilters(newParams);
+    } else {
+      console.error("onApplyFilters is not a function");
+    }
   };
+  
 
   return (
     <div className="filter">

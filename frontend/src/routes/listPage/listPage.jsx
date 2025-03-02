@@ -10,25 +10,30 @@ function ListPage() {
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
+    console.log("Search Params Changed:", Object.fromEntries(searchParams.entries()));
+    
     async function getRooms() {
       try {
-        const filters = Object.fromEntries(searchParams.entries()); // Convert search params to object
-        const rooms = await fetchRooms(filters); // Fetch data with filters
+        const filters = Object.fromEntries(searchParams.entries()); 
+        console.log("Filters sent to fetchRooms:", filters);  // Check if filters are being sent correctly
+        const rooms = await fetchRooms(filters); 
         setData(rooms);
         console.log("Fetched Data:", rooms);
       } catch (error) {
         console.error("Error fetching rooms:", error);
       }
     }
-
+  
     getRooms();
-  }, [searchParams]); 
+  }, [searchParams]);
+   
+   
 
   return (
     <div className="listPage">
       <div className="listContainer">
         <div className="wrapper">
-          <Filter />
+          <Filter onApplyFilters={(params) => setSearchParams(params)} />
           {data.length > 0 ? (
             data.map((room, index) => <Card key={index} item={room} />)
           ) : (
@@ -37,7 +42,7 @@ function ListPage() {
         </div>
       </div>
     </div>
-  );
+  );  
 }
 
 export default ListPage;

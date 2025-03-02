@@ -4,11 +4,13 @@ async function fetchRooms(filters = {}) {
   try {
     console.log("Fetching rooms with filters:", filters);
     const response = await apiRequest.post("/availableRoom/filter", filters);
+    console.log("Raw API Request Body:", JSON.stringify(filters, null, 2));
+
 
     if (!Array.isArray(response.data)) {
       console.error("Invalid API response:", response.data);
       return [];
-    }
+    }  
 
     console.log("API Response:", response.data); 
     return response.data.map((room) => ({

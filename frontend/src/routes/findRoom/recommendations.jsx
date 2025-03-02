@@ -9,31 +9,27 @@ function Recommendations() {
   const navigate = useNavigate();
   const recommendations = location.state?.recommendations || [];
 
-  // Redirect user if no recommendations exist (user directly visits this page)
   useEffect(() => {
     console.log(recommendations);
     if (!location.state) {
-      navigate("/"); // Redirect back to the form page
+      navigate("/"); 
     }
   }, [location, navigate]);
 
   return (
     <div className="recommendations">
-      {/* Background Wallpaper */}
-      {/*<img className="backgroundImage" src="/wall3.jpg" alt="Background Wallpaper" />*/}
-
       <h1>Recommended Rooms</h1>
       <div className="recommendations-list">
         {recommendations.length ? (
           recommendations.map((room, index) => (
             <div key={index} className="room-card">
-              <h2>{room.place}</h2>
-              <p><strong>Rent:</strong> ₹{room.rent}</p>
-              <p><strong>Distance:</strong> {room.distance} meters</p>
-              <p><strong>Gender:</strong> {room.gender}</p>
-              <p><strong>WiFi:</strong> {room.wifi}</p>
-              <p><strong>Food:</strong> {room.food}</p>
-              <p><strong>Parking:</strong> {room.parking}</p>
+              <h2>{room.Place}</h2>
+              <p><strong>Rent:</strong> ₹{room.Rent}</p>
+              <p><strong>Distance:</strong> {room.Distance} meters</p>
+              <p><strong>Gender:</strong> {room.Gender}</p>
+              <p><strong>WiFi:</strong> {room.WiFi}</p>
+              <p><strong>Food:</strong> {room.Food}</p>
+              <p><strong>Parking:</strong> {room.Parking}</p>
             </div>
           ))
         ) : (

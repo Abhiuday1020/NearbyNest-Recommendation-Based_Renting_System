@@ -12,14 +12,11 @@ from sklearn.neighbors import NearestNeighbors
 app = Flask(__name__)
 CORS(app)
 
-# Load dataset
 df = pd.read_csv("recommendation_dataset.csv")
 
-# Define categorical and numerical features
 categorical_features = ["Gender", "WiFi", "Food", "Parking", "Amenities"]
 numeric_features = ["Rent", "Distance"]
 
-# Define preprocessing pipelines
 categorical_transformer = Pipeline(steps=[
     ("imputer", SimpleImputer(strategy="constant", fill_value="missing")),
     ("onehot", OneHotEncoder(handle_unknown="ignore"))
@@ -36,48 +33,34 @@ preprocessor = ColumnTransformer(
     ]
 )
 
-# Transform dataset and fit KNN
 df_transformed = preprocessor.fit_transform(df)
 knn_model = NearestNeighbors(n_neighbors=10, metric="euclidean")
 knn_model.fit(df_transformed)
 
 def recommend_rooms(user_input):
-    """ Recommends nearest rooms based on user preferences. """
 
-    # Convert user input to DataFrame
     user_df = pd.DataFrame([user_input])  
-
-    # Ensure all required fields exist
+    print("hello", user_df.columns)
     for col in categorical_features + numeric_features:
         if col not in user_df:
-            user_df[col] = None  # Assign None instead of NaN
+            user_df[col] = None
 
-    # Fill missing values with default values
     user_df.fillna({
-        "Rent": df["Rent"].median(),
-        "Distance": df["Distance"].median(),
-        "Gender": "Male",
-        "WiFi": "No",
         "Food": "No",
-        "Parking": "No",
-        "Amenities": "None"
+        "Parking": "Yes",
     }, inplace=True)
 
-    # Transform user input
+    user_df = user_df.infer_objects(copy=False)
     input_transformed = preprocessor.transform(user_df)
 
-    # Convert sparse matrix to dense array if necessary
     if hasattr(input_transformed, "toarray"):
         input_transformed = input_transformed.toarray()
 
-    # Ensure there are no NaN values after transformation
     if np.isnan(input_transformed).any():
         raise ValueError("Input contains NaN after transformation. Please check preprocessing.")
 
-    # Find nearest neighbors
     distances, indices = knn_model.kneighbors(input_transformed)
 
-    # Retrieve recommended rooms
     recommendations = df.iloc[indices[0]]
 
     return recommendations.to_dict(orient="records")
@@ -86,8 +69,8 @@ def recommend_rooms(user_input):
 
 @app.route("/recommendations", methods=["POST"])
 def get_recommendations():
-    """ API endpoint for getting recommendations based on user input. """
     user_input = request.json
+    print("Data received from frontend:", user_input)
     recommendations = recommend_rooms(user_input)
     return jsonify(recommendations)
 

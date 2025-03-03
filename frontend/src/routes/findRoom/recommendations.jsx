@@ -30,6 +30,7 @@ function Recommendations() {
               <p><strong>WiFi:</strong> {room.WiFi}</p>
               <p><strong>Food:</strong> {room.Food}</p>
               <p><strong>Parking:</strong> {room.Parking}</p>
+              <p><strong>Amenities:</strong> {room.Amenities}</p>
             </div>
           ))
         ) : (
